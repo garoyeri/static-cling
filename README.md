@@ -100,7 +100,7 @@ az staticwebapp create --location centralus --resource-group StaticCling --name 
 
 At this point, the Static Web App is created and waiting for a deployment. The Azure CLI doesn't have all the features we need to completely manage this through the CLI, so we need to jump into the browser and see how it is going.
 
-Navigate to your Azure Portal <https://portal.azure.com>, ensure you've got the right Subscription selected, browse your Resource Groups (cheat code here: <https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups>) 
+Navigate to your Azure Portal <https://portal.azure.com>, ensure you've got the right Subscription selected, browse your Resource Groups (cheat code here: <https://portal.azure.com/#blade/HubsExtension/BrowseResourceGroups>)
 
 Find your "StaticCling" Resource Group and click it, you should see a single resource there called "StaticCling", click it as well.
 
@@ -114,7 +114,7 @@ This part of the demo follows the documentation here: [Tutorial: Publish Azure S
 
 We want to deploy the site using Azure DevOps because the corporation who pays for the Developer's lavish tastes requires a bit of privacy and wants to deploy things on the down-low. This can easily be accommodated. To the local workspace, we add an Azure Pipelines file (in the root folder of the workspace):
 
-`azure-pipelines.yml`
+`azure-pipelines.yml`:
 
 ```yaml
 trigger:
@@ -141,15 +141,15 @@ Like our Developer, you likely have no commitment issues. So please commit all t
 
 > This code is hosted on GitHub, so you can even try to point your Azure Pipeline at this repository (it is public, just follow the Microsoft guide here: <https://docs.microsoft.com/en-us/azure/static-web-apps/get-started-portal>).
 
-Navigate to a project, or create a new project in Azure DevOps. You should have (or can create) a personal space in your company Azure DevOps instance. If you don't have one, you can create one by clicking on the Azure DevOps logo at the top left corner: 
+Navigate to a project, or create a new project in Azure DevOps. You should have (or can create) a personal space in your company Azure DevOps instance. If you don't have one, you can create one by clicking on the Azure DevOps logo at the top left corner:
 
-![image-20210826223209846](images/azure-devops-logo.png)
+![Azure DevOps Logo](images/azure-devops-logo.png)
 
 Then click "New organization" and follow the prompts to create your own space.
 
 Getting back to the plot: access the Pipelines for your project here:
 
-![image-20210826223528015](images/azure-pipelines-menu.png)
+![Azure Pipelines Menu Item](images/azure-pipelines-menu.png)
 
 Click "New pipeline" at the top right.
 
@@ -161,7 +161,7 @@ We need to keep a secret, so click "Variables" at the top right, then go back to
 
 Create a new variable and call it `deployment_token`, paste the value in the "Value" field and check the box that says "Keep this value secret" (a gentle-developer never tells).
 
-![image-20210826230056325](images/secret-variables.png)
+![Secret variables for Azure Pipelines](images/secret-variables.png)
 
 Click "OK". Then save and run the pipeline.
 
@@ -192,11 +192,10 @@ dotnet build
 
 If everything works out, go ahead and commit and push and let the application rebuild on Azure Pipeline.
 
-To see the function execute, try this link: <https://purple-sand-08becb610.azurestaticapps.net/api/SayHello?name=Developer>
+To see the function execute, try this link: <https://purple-sand-08becb610.azurestaticapps.net/api/SayHello?name=Developer>. You can also connect a custom domain like I did here: <https://static-cling.az.garoyeri.dev>.
 
 The `func`, as they say, has been brought. While this doesn't feel like much on the surface, the insinuation is that you can now call out to any other Azure resources, provide authentication, and any other interesting things.
 
 If you want to dive in deeper, check out the Microsoft documentation here: <https://docs.microsoft.com/en-us/azure/static-web-apps/>. The Function tied to the Azure Static Web App is a full-fledged `dotnet` Azure Function. You can only use .NET Core 3.1 this way (for now), so don't try using the `dotnet-isolated` worker type because it won't work (for now).
 
 You can deploy whatever .NET code you want: it follows the Azure Function Consumption plan pricing (<https://azure.microsoft.com/en-us/pricing/details/functions/>) which includes 400,000 GB-s of execution time and 1 million executions for free. This means that you should keep your Functions simple and fast. The Premium pricing is reasonable, but try the Consumption model first to see if it fits your needs.
-
