@@ -190,3 +190,13 @@ func new --name SayHello --template "HTTP trigger" --authlevel "anonymous"
 dotnet build
 ```
 
+If everything works out, go ahead and commit and push and let the application rebuild on Azure Pipeline.
+
+To see the function execute, try this link: <https://purple-sand-08becb610.azurestaticapps.net/api/SayHello?name=Developer>
+
+The `func`, as they say, has been brought. While this doesn't feel like much on the surface, the insinuation is that you can now call out to any other Azure resources, provide authentication, and any other interesting things.
+
+If you want to dive in deeper, check out the Microsoft documentation here: <https://docs.microsoft.com/en-us/azure/static-web-apps/>. The Function tied to the Azure Static Web App is a full-fledged `dotnet` Azure Function. You can only use .NET Core 3.1 this way (for now), so don't try using the `dotnet-isolated` worker type because it won't work (for now).
+
+You can deploy whatever .NET code you want: it follows the Azure Function Consumption plan pricing (<https://azure.microsoft.com/en-us/pricing/details/functions/>) which includes 400,000 GB-s of execution time and 1 million executions for free. This means that you should keep your Functions simple and fast. The Premium pricing is reasonable, but try the Consumption model first to see if it fits your needs.
+
