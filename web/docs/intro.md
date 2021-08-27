@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Tutorial Intro
 
-Let's discover **Docusaurus in less than 5 minutes**.
+Let's discover **Docusaurus in less than 5 minutes**. And let's demonstrate this on the Static Cling Azure Static Web Apps Brown Bag Special Thing.
 
 ## Getting Started
 
